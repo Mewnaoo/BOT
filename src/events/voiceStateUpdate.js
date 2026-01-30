@@ -17,16 +17,16 @@ module.exports = {
         
         // Check if user joined the creator channel
         if (newState.channelId === settings.creatorChannelId) {
-          // Create a new temporary voice channel
-          await createTemporaryVoiceChannel(newState, settings);
+          // Create a new Nooporary voice channel
+          await createNooporaryVoiceChannel(newState, settings);
         }
       }
       
       // Check if a user left a voice channel
       if (oldState.channelId && !newState.channelId) {
-        // Check if the channel was a temporary voice channel
-        const tempChannel = await NoopChannel.findOne({ channelId: oldState.channelId });
-        if (!tempChannel) return;
+        // Check if the channel was a Nooporary voice channel
+        const NoopChannel = await NoopChannel.findOne({ channelId: oldState.channelId });
+        if (!NoopChannel) return;
         
         // Get the channel
         const channel = guild.channels.cache.get(oldState.channelId);
@@ -34,7 +34,7 @@ module.exports = {
         
         // If the channel is empty, delete it
         if (channel.members.size === 0) {
-          await channel.delete('Temporary voice channel is empty');
+          await channel.delete('Nooporary voice channel is empty');
           await NoopChannel.deleteOne({ channelId: oldState.channelId });
         }
       }
@@ -44,7 +44,7 @@ module.exports = {
   }
 };
 
-async function createTemporaryVoiceChannel(state, settings) {
+async function createNooporaryVoiceChannel(state, settings) {
   const { member, guild, client } = state;
   
   try {
@@ -78,22 +78,22 @@ async function createTemporaryVoiceChannel(state, settings) {
     await member.voice.setChannel(channel);
     
     // Save the channel to the database
-    const tempChannel = new NoopChannel({
+    const NoopChannel = new NoopChannel({
       guildId: guild.id,
       channelId: channel.id,
       ownerId: member.id,
       name: channelName
     });
     
-    await tempChannel.save();
+    await NoopChannel.save();
     
     // Send a message to the user
     await member.send({
-      content: `I've created a temporary voice channel for you: **${channelName}**\n` +
+      content: `I've created a Nooporary voice channel for you: **${channelName}**\n` +
                `You can manage your channel in the interface channel.`
     }).catch(() => {}); // Ignore if DMs are closed
     
   } catch (error) {
-    console.error('Error creating temporary voice channel:', error);
+    console.error('Error creating Nooporary voice channel:', error);
   }
 } 
