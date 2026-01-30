@@ -14,9 +14,9 @@ const client = new Client({
   ]
 });
 
-// Collections for commands and temporary voice channels
+// Collections for commands and Nooporary voice channels
 client.commands = new Collection();
-client.tempVoiceChannels = new Collection();
+client.NoopVoiceChannels = new Collection();
 
 // Load commands
 const commandsPath = path.join(__dirname, 'commands');
@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
 // API endpoint for bot information
 app.get('/api/info', (req, res) => {
   res.json({
-    name: 'Temporary Voice Channel Bot',
+    name: 'Nooporary Voice Channel Bot',
     version: '1.0.0',
     developer: 'Coders Planet',
     uptime: Math.floor(process.uptime()),
