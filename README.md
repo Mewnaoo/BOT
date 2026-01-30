@@ -1,4 +1,4 @@
-# TempVoice Discord Bot
+# Noop Discord Bot
 
 A Discord bot for creating and managing temporary voice channels, created by Coders Planet.
 
