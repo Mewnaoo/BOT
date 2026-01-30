@@ -1,5 +1,5 @@
 const { PermissionFlagsBits, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
-const TempVoiceChannel = require('../models/TempVoiceChannel');
+const NoopChannel = require('../models/NoopChannel');
 
 // Function to handle trusting a user
 async function trustUser(interaction, userId) {
@@ -7,7 +7,7 @@ async function trustUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -19,7 +19,7 @@ async function trustUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -62,7 +62,7 @@ async function untrustUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -74,7 +74,7 @@ async function untrustUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -109,7 +109,7 @@ async function blockUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -121,7 +121,7 @@ async function blockUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -170,7 +170,7 @@ async function unblockUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -182,7 +182,7 @@ async function unblockUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -217,7 +217,7 @@ async function kickUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -229,7 +229,7 @@ async function kickUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -261,7 +261,7 @@ async function inviteUser(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -273,7 +273,7 @@ async function inviteUser(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -307,7 +307,7 @@ async function transferOwnership(interaction, userId) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -319,7 +319,7 @@ async function transferOwnership(interaction, userId) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { success: false, message: 'Your temporary voice channel no longer exists.' };
     }
 
@@ -379,7 +379,7 @@ async function claimOwnership(interaction) {
     }
 
     // Find the temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       channelId: channel.id
     });
@@ -456,7 +456,7 @@ async function createUserSelectionDropdown(interaction, actionType) {
   
   try {
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -471,7 +471,7 @@ async function createUserSelectionDropdown(interaction, actionType) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return { 
         success: false, 
         message: 'Your temporary voice channel no longer exists.' 

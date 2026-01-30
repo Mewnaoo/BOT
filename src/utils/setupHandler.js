@@ -1,10 +1,10 @@
-const TempVoiceSettings = require('../models/TempVoiceSettings');
+const NoopSettings = require('../models/NoopSettings');
 
 // Function to verify if the setup is still valid
 async function verifySetup(guild) {
   try {
     // Get settings
-    const settings = await TempVoiceSettings.findOne({ guildId: guild.id });
+    const settings = await NoopSettings.findOne({ guildId: guild.id });
     if (!settings) return { valid: false, reason: 'No settings found' };
 
     // Check if category exists
@@ -31,7 +31,7 @@ async function verifySetup(guild) {
 async function cleanupInvalidSetup(guild) {
   try {
     // Delete settings
-    await TempVoiceSettings.deleteOne({ guildId: guild.id });
+    await NoopSettings.deleteOne({ guildId: guild.id });
     return true;
   } catch (error) {
     console.error('Error cleaning up invalid setup:', error);

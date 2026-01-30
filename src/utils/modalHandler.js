@@ -1,4 +1,4 @@
-const TempVoiceChannel = require('../models/TempVoiceChannel');
+const NoopChannel = require('../models/NoopChannel');
 const { trustUser, untrustUser, blockUser, unblockUser, kickUser, inviteUser, transferOwnership } = require('./permissionHandler');
 const { createSuccessEmbed, createErrorEmbed } = require('./embeds');
 
@@ -97,7 +97,7 @@ async function handleRenameChannel(interaction) {
     }
     
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -115,7 +115,7 @@ async function handleRenameChannel(interaction) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return await interaction.editReply({
         embeds: [createErrorEmbed(
           'Channel Not Found', 
@@ -188,7 +188,7 @@ async function handleLimitChannel(interaction) {
     }
     
     // Find user's temporary voice channel
-    const tempChannel = await TempVoiceChannel.findOne({ 
+    const tempChannel = await NoopChannel.findOne({ 
       guildId: guild.id,
       ownerId: member.id
     });
@@ -206,7 +206,7 @@ async function handleLimitChannel(interaction) {
     // Get the channel
     const channel = guild.channels.cache.get(tempChannel.channelId);
     if (!channel) {
-      await TempVoiceChannel.deleteOne({ channelId: tempChannel.channelId });
+      await NoopChannel.deleteOne({ channelId: tempChannel.channelId });
       return await interaction.editReply({
         embeds: [createErrorEmbed(
           'Channel Not Found', 
