@@ -1,7 +1,7 @@
 {
   "name": "vc-panel",
   "version": "1.0.0",
-  "description": "A Discord bot for creating and managing temporary voice channels",
+  "description": "A Discord bot for creating and managing Nooporary voice channels",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/deploy-commands.js && node src/index.js",
@@ -13,7 +13,7 @@
     "bot",
     "voice",
     "channels",
-    "temporary"
+    "Nooporary"
   ],
   "author": "",
   "license": "MIT",

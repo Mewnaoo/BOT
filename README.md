@@ -1,10 +1,10 @@
 # Noop Discord Bot
 
-A Discord bot for creating and managing temporary voice channels, created by Coders Planet.
+A Discord bot for creating and managing Nooporary voice channels, created by Coders Planet.
 
 ## Features
 
-- Create temporary voice channels that delete when empty
+- Create Nooporary voice channels that delete when empty
 - Manage channels with an easy-to-use interface
 - Control privacy, user limits, and channel settings
 - Manage users (invite, kick, trust, block)
