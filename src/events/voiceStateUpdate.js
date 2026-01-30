@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
-const TempVoiceSettings = require('../models/TempVoiceSettings');
-const TempVoiceChannel = require('../models/TempVoiceChannel');
+const NoopSettings = require('../models/NoopSettings');
+const NoopChannel = require('../models/NoopChannel');
 
 module.exports = {
   name: Events.VoiceStateUpdate,
@@ -12,7 +12,7 @@ module.exports = {
       // Check if user joined a voice channel
       if (!oldState.channelId && newState.channelId) {
         // Find settings for this guild
-        const settings = await TempVoiceSettings.findOne({ guildId: guild.id });
+        const settings = await NoopSettings.findOne({ guildId: guild.id });
         if (!settings) return;
         
         // Check if user joined the creator channel
@@ -25,7 +25,7 @@ module.exports = {
       // Check if a user left a voice channel
       if (oldState.channelId && !newState.channelId) {
         // Check if the channel was a temporary voice channel
-        const tempChannel = await TempVoiceChannel.findOne({ channelId: oldState.channelId });
+        const tempChannel = await NoopChannel.findOne({ channelId: oldState.channelId });
         if (!tempChannel) return;
         
         // Get the channel
@@ -35,7 +35,7 @@ module.exports = {
         // If the channel is empty, delete it
         if (channel.members.size === 0) {
           await channel.delete('Temporary voice channel is empty');
-          await TempVoiceChannel.deleteOne({ channelId: oldState.channelId });
+          await NoopChannel.deleteOne({ channelId: oldState.channelId });
         }
       }
     } catch (error) {
@@ -78,7 +78,7 @@ async function createTemporaryVoiceChannel(state, settings) {
     await member.voice.setChannel(channel);
     
     // Save the channel to the database
-    const tempChannel = new TempVoiceChannel({
+    const tempChannel = new NoopChannel({
       guildId: guild.id,
       channelId: channel.id,
       ownerId: member.id,
