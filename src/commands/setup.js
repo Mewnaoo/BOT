@@ -44,7 +44,7 @@ module.exports = {
       return interaction.editReply({
         embeds: [createInfoEmbed(
           'Already Set Up', 
-          'TempVoice is already set up in this server.',
+          'Noop is already set up in this server.',
           [
             { 
               name: 'Current Setup', 
@@ -62,7 +62,7 @@ module.exports = {
         await interaction.editReply({
           embeds: [createWarningEmbed(
             'Invalid Setup Cleaned', 
-            `Previous setup was invalid (${setupStatus.reason}). It has been cleaned up. Please run the command again to set up TempVoice.`
+            `Previous setup was invalid (${setupStatus.reason}). It has been cleaned up. Please run the command again to set up Noop.`
           )],
           ephemeral: true
         });
